@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -20,13 +18,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TimePicker;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -36,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     ListView listview;
     DatabaseManager mDatabase;
     List<EventsModel> eventsmodellist;
-    SharedPreferences sharedpreferences;
     EditText title,description;
     EventsAdapter adapter;
     @Override
@@ -47,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         future=findViewById(R.id.future);
         past=findViewById(R.id.past);
         listview=findViewById(R.id.listview);
-        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(this);
         eventsmodellist =new ArrayList<>();
         future.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.main_menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -170,11 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 long time = c.getTimeInMillis();
                 String stime = String.valueOf(time);
                 String newt = convertDate(stime,"yyyy-MM-dd hh:mm:ss");
-//                SharedPreferences.Editor editor = sharedpreferences.edit();
-//                editor.putString("Name",title.toString());
-//                editor.putString("description",description.toString());
-//                editor.putString("date",newt);
-//                editor.apply();
                 mDatabase.addEmployee(title.getText().toString(),description.getText().toString(),stime);
                 alertDialog.dismiss();
             }});

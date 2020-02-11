@@ -105,6 +105,6 @@ class EventsAdapter extends ArrayAdapter<EventsModel> {
                 ));
             } while (cursor.moveToNext());
         }
-        notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 }

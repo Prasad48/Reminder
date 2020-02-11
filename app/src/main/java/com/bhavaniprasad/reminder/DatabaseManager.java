@@ -106,11 +106,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_NAME, name);
         contentValues.put(COLUMN_DESC, desc);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-        contentValues.put(COLUMN_JOIN_DATE, date); // Date as string
+        contentValues.put(COLUMN_JOIN_DATE, date);
 
-
-//        contentValues.put(COLUMN_JOIN_DATE, date);
         SQLiteDatabase db = getWritableDatabase();
         return db.insert(TABLE_NAME, null, contentValues) != -1;
     }
